@@ -45,6 +45,6 @@ app.post("/integrasi-data-pembayaran-done", async (req, res) => {
   // }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+  console.log(`app running`);
 });
