@@ -34,7 +34,7 @@ app.get("/get-data-shopee", async (req, res) => {
 
 app.post("/integrasi-data-pembayaran-done", async (req, res) => {
   const dataDana = await superagent.get(
-    "http://localhost:3001/get-all-payment-done"
+    "https://eai-dana.herokuapp.com/get-all-payment-done"
   );
 
   let data = JSON.parse(dataDana.text);
