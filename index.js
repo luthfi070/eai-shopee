@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const superagent = require("superagent");
-const { todana } = require("./models/index");
+const { todana, datapembayaran } = require("./models/index");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,9 +40,20 @@ app.post("/integrasi-data-pembayaran-done", async (req, res) => {
   let data = JSON.parse(dataDana.text);
 
   res.send(data);
-  // for(i = 0; i < dataDana.data.length; i++){
+  for (i = 0; i < dataDana.data.length; i++) {
+    datapembayaran.update(
+      {
+        status: "done",
+      },
+      {
+        where: {
+          id_pembayaran: dataDana.data[i].id_pembayaran,
+        },
+      }
+    );
+  }
 
-  // }
+  res.send("data pembayaran di konfirmasi");
 });
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
